@@ -20,7 +20,7 @@ namespace TrungHieuTourists.EntityFrameworkCore;
     )]
 public class TrungHieuTouristsEntityFrameworkCoreTestModule : AbpModule
 {
-    private SqliteConnection? _sqliteConnection;
+    private SqliteConnection _sqliteConnection;
 
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
