@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "TrungHieuTourists.Admin.HttpApi": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:60840;http://localhost:60846"
+    }
+  }
+}

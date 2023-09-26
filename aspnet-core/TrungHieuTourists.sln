@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrungHieuTourists.HttpApi.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TrungHieuTourists.DbMigrator", "src\TrungHieuTourists.DbMigrator\TrungHieuTourists.DbMigrator.csproj", "{AA94D832-1CCC-4715-95A9-A483F23A1A5D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "identity", "identity", "{393F3635-69AE-471C-806C-D032386E079C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "auth", "auth", "{393F3635-69AE-471C-806C-D032386E079C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "common", "common", "{A6CD70E0-2722-4C9A-BFBB-FC98E744384C}"
 EndProject

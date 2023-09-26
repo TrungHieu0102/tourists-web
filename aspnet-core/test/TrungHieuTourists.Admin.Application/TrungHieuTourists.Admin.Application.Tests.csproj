@@ -9,12 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\TrungHieuTourists.Admin.Application\TrungHieuTourists.Admin.Application.csproj" />
-    <ProjectReference Include="..\TrungHieuTourists.Domain.Tests\TrungHieuTourists.Domain.Tests.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <ProjectReference Include="..\..\src\TrungHieuTourists.Admin.Application\TrungHieuTourists.Admin.Application.csproj" />
+    <ProjectReference Include="..\TrungHieuTourists.Domain.Tests\TrungHieuTourists.Domain.Tests.csproj" />
   </ItemGroup>
 
 </Project>
