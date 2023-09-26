@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TrungHieuTourists.Admin.Application.Contracts\TrungHieuTourists.Admin.Application.Contracts.csproj" />
-    <ProjectReference Include="..\TrungHieuTourists.Domain.Shared\TrungHieuTourists.Domain.Shared.csproj" />
+ 
   </ItemGroup>
 
 </Project>
