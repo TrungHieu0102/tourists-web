@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace TrungHieuTourists.Tours
 {
-    public class TourAttributeDecimail: Entity<Guid>
+    public class TourAttributeDecimal: Entity<Guid>
     {
         public Guid AttribiteId { get; set; }
         public Guid TourId { get; set; }

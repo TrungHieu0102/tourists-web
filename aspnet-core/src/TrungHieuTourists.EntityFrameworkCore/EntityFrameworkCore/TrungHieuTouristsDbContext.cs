@@ -1,4 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TrungHieuTourists.Configurations.TourCategories;
+using TrungHieuTourists.Configurations.Tours;
+using TrungHieuTourists.Countries;
+using TrungHieuTourists.Oders;
+using TrungHieuTourists.Orders;
+using TrungHieuTourists.Promotions;
+using TrungHieuTourists.Slots;
+using TrungHieuTourists.SlotTicketItems;
+using TrungHieuTourists.SlotTickets;
+using TrungHieuTourists.TourAttributes;
+using TrungHieuTourists.TourCategoris;
+using TrungHieuTourists.Tours;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -51,6 +63,34 @@ public class TrungHieuTouristsDbContext :
     public DbSet<Tenant> Tenants { get; set; }
     public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
 
+    //Tourist App
+    public DbSet<Country> Contries { get; set; }
+    public DbSet<Order> Orders { get; set; }    
+    public DbSet<OrderItem> OrderItems { get; set; }
+    public DbSet<OrderTransaction> OrderTransactions { get; set; }
+    public DbSet<Promotion> Promotions { get; set; }
+    public DbSet<PromotionCategory> PromotionCategories { get; set; }
+    public DbSet<PromotionCountry> PromotionCountries { get; set; }
+    public DbSet<PromotionTour> PromotionTours { get; set; }
+    public DbSet<PromotionUsageHistory> PromotionUsageHistories { get; set; }
+    public DbSet<Slot> Slots { get; set; }
+    public DbSet<SlotTicket> SlotTickets { get; set; }
+    public DbSet<SlotTicketItem> SlotTicketItems { get; set; }
+    public DbSet<TourAttribute> TourAttributes { get; set; }
+    public DbSet<TourCategory>TourCategoris { get; set; }
+    public DbSet<Tour> Tours { get; set; }
+    public DbSet<Tag> Tags { get; set; }
+    public DbSet<TourAttributeDateTime> TourAttributeDateTimes { get; set; }
+    public DbSet<TourAttributeDecimal> TourAttributeDecimails { get; set; }
+    public DbSet<TourAttributeInt> TourAttributeInts { get; set; }
+    public DbSet<TourAttributeText> TourAttributeTexts { get; set; }
+    public DbSet<TourAttributeVarchar> TourAttributeVarchars { get; set; }
+    public DbSet<TourLink> TourLinks { get; set; }  
+    public DbSet<TourReview> TourReviews { get; set; }
+    public DbSet<TourTag> TourTags { get; set; }    
+
+
+
     #endregion
 
     public TrungHieuTouristsDbContext(DbContextOptions<TrungHieuTouristsDbContext> options)
@@ -75,12 +115,39 @@ public class TrungHieuTouristsDbContext :
         builder.ConfigureTenantManagement();
 
         /* Configure your own tables/entities inside here */
+        builder.ApplyConfiguration(new TourAttributeConfiguration());
 
-        //builder.Entity<YourEntity>(b =>
-        //{
-        //    b.ToTable(TrungHieuTouristsConsts.DbTablePrefix + "YourEntities", TrungHieuTouristsConsts.DbSchema);
-        //    b.ConfigureByConvention(); //auto configure for the base class props
-        //    //...
-        //});
+        builder.ApplyConfiguration(new SlotConfiguration());
+
+        builder.ApplyConfiguration(new SlotTicketConfiguration());
+        builder.ApplyConfiguration(new SlotTicketItemConfiguration());
+
+        builder.ApplyConfiguration(new CountryConfiguration());
+
+        builder.ApplyConfiguration(new OrderConfiguration());
+        builder.ApplyConfiguration(new OrderItemConfiguration());
+        builder.ApplyConfiguration(new OrderTransactionConfiguration());
+
+        builder.ApplyConfiguration(new TourCategoryConfiguration());
+
+        builder.ApplyConfiguration(new TourConfiguration());
+        builder.ApplyConfiguration(new TourLinkConfiguration());
+        builder.ApplyConfiguration(new TourReviewConfiguration());
+        builder.ApplyConfiguration(new TourTagConfiguration());
+        builder.ApplyConfiguration(new TagConfiguration());
+        builder.ApplyConfiguration(new TourAttributeDateTimeConfiguration());
+        builder.ApplyConfiguration(new TourAttributeDecimalConfiguration());
+        builder.ApplyConfiguration(new TourAttributeIntConfiguration());
+        builder.ApplyConfiguration(new TourAttributeTextConfiguration());
+        builder.ApplyConfiguration(new TourAttributeVarcharConfiguration());
+
+        builder.ApplyConfiguration(new PromotionConfiguration());
+        builder.ApplyConfiguration(new PromotionCategoryConfiguration());
+        builder.ApplyConfiguration(new PromotionCountryConfiguration());
+        builder.ApplyConfiguration(new PromotionTourConfiguration());
+        builder.ApplyConfiguration(new PromotionUsageHistoryConfiguration());
+
+
+
     }
 }

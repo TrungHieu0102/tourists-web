@@ -10,10 +10,10 @@ namespace TrungHieuTourists.Tours
     public class TourLink:Entity
     {
         public Guid TourId { get; set; }
-        public Guid LinkedTour { get; set; }
+        public Guid LinkedTourId { get; set; }
         public override object[] GetKeys()
         {
-            return new object[] { TourId, LinkedTour };
+            return new object[] { TourId, LinkedTourId };
         }
 
     }
