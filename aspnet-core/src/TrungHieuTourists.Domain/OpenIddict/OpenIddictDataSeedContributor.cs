@@ -87,13 +87,20 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
             OpenIddictConstants.Permissions.Scopes.Profile,
             OpenIddictConstants.Permissions.Scopes.Roles
         };
+        var adminScopes = new List<string>();
+        adminScopes.AddRange(commonScopes);
+        adminScopes.Add("TrungHieuTourists.Admin");
+
+        var clientScopes = new List<string>();
+        clientScopes.AddRange(commonScopes);
+        clientScopes.Add("TrungHieuTourists");
 
         var configurationSection = _configuration.GetSection("OpenIddict:Applications");
         //Admin Client
         var webAdmiClientId = configurationSection["TrungHieuTourists_Admin:ClientId"];
         if (!webAdmiClientId.IsNullOrWhiteSpace())
         {
-            var adminWebClientRootUrl = configurationSection["TrungHieuTourists_Admin:RootUrl"].EnsureEndsWith('/');
+            var adminWebClientRootUrl = configurationSection["TrungHieuTourists_Admin:RootUrl"].TrimEnd('/');
 
             /* TrungHieuTourists_Web client is only needed if you created a tiered
              * solution. Otherwise, you can delete this client. */
@@ -109,10 +116,30 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                     OpenIddictConstants.GrantTypes.RefreshToken,
                     OpenIddictConstants.GrantTypes.Implicit
                 },
-                scopes: commonScopes,
-                redirectUri: $"{adminWebClientRootUrl}signin-oidc",
+                scopes: adminScopes,
+                redirectUri: adminWebClientRootUrl,
                 clientUri: adminWebClientRootUrl,
-                postLogoutRedirectUri: $"{adminWebClientRootUrl}signout-callback-oidc"
+                postLogoutRedirectUri: adminWebClientRootUrl
+            );
+        }
+        // Swagger Client
+        var swaggerClientId = configurationSection["TrungHieuTourists_Admin_Swagger:ClientId"];
+        if (!swaggerClientId.IsNullOrWhiteSpace())
+        {
+            var swaggerRootUrl = configurationSection["TrungHieuTourists_Admin_Swagger:RootUrl"].TrimEnd('/');
+            await CreateApplicationAsync(
+                name: swaggerClientId,
+                type: OpenIddictConstants.ClientTypes.Public,
+                consentType: OpenIddictConstants.ConsentTypes.Implicit,
+                displayName: "Swagger Admin Application",
+                secret: null,
+                grantTypes: new List<string>
+                {
+                    OpenIddictConstants.GrantTypes.AuthorizationCode,
+                },
+                scopes: adminScopes,
+                redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
+                clientUri: swaggerRootUrl
             );
         }
         //Web Client
@@ -133,33 +160,15 @@ public class OpenIddictDataSeedContributor : IDataSeedContributor, ITransientDep
                 {
                     OpenIddictConstants.GrantTypes.AuthorizationCode, OpenIddictConstants.GrantTypes.Implicit
                 },
-                scopes: commonScopes,
+                scopes: clientScopes,
                 redirectUri: $"{webClientRootUrl}signin-oidc",
                 clientUri: webClientRootUrl,
                 postLogoutRedirectUri: $"{webClientRootUrl}signout-callback-oidc"
             );
         }
-         
-        // Swagger Client
-        //var swaggerClientId = configurationSection["TrungHieuTourists_Swagger:ClientId"];
-        //if (!swaggerClientId.IsNullOrWhiteSpace())
-        //{
-        //    var swaggerRootUrl = configurationSection["TrungHieuTourists_Swagger:RootUrl"]?.TrimEnd('/');
 
-        //    await CreateApplicationAsync(
-        //        name: swaggerClientId!,
-        //        type: OpenIddictConstants.ClientTypes.Public,
-        //        consentType: OpenIddictConstants.ConsentTypes.Implicit,
-        //        displayName: "Swagger Application",
-        //        secret: null,
-        //        grantTypes: new List<string> { OpenIddictConstants.GrantTypes.AuthorizationCode, },
-        //        scopes: commonScopes,
-        //        redirectUri: $"{swaggerRootUrl}/swagger/oauth2-redirect.html",
-        //        clientUri: swaggerRootUrl
-        //    );
-        //}
+       
     }
-
     private async Task CreateApplicationAsync(
         [NotNull] string name,
         [NotNull] string type,

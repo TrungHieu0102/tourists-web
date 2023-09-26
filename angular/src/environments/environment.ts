@@ -6,21 +6,21 @@ export const environment = {
   production: false,
   application: {
     baseUrl,
-    name: 'TrungHieuTourists',
+    name: 'TrungHieuTourists Admin',
     logoUrl: '',
   },
   oAuthConfig: {
-    issuer: 'https://localhost:44339/',
+    issuer: 'https://localhost:5000/',
     redirectUri: baseUrl,
-    clientId: 'TrungHieuTourists_App',
+    clientId: 'TrungHieuTourists_Admin',
     responseType: 'code',
-    scope: 'offline_access TrungHieuTourists',
+    scope: 'offline_access TrungHieuTourists.Admin',
     requireHttps: true,
   },
   apis: {
     default: {
-      url: 'https://localhost:44396',
-      rootNamespace: 'TrungHieuTourists',
+      url: 'https://localhost:5001',
+      rootNamespace: 'TrungHieuTourists.Admin',
     },
   },
 } as Environment;

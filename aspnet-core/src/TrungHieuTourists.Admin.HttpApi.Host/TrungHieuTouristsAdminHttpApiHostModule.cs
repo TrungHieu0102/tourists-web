@@ -198,7 +198,7 @@ public class TrungHieuTouristsAdminHttpApiHostModule : AbpModule
 
             var configuration = context.GetConfiguration();
             options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-            options.OAuthScopes("TrungHieuTourists");
+            options.OAuthScopes("TrungHieuTourists.Admin");
         });
 
         app.UseAuditing();
