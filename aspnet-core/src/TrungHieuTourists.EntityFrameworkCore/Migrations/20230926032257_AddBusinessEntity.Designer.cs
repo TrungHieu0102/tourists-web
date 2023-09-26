@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrungHieuTourists.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace TrungHieuTourists.Migrations
 {
     [DbContext(typeof(TrungHieuTouristsDbContext))]
-    partial class TrungHieuTouristsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230926032257_AddBusinessEntity")]
+    partial class AddBusinessEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -341,7 +344,7 @@ namespace TrungHieuTourists.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("WEBPromotionCountries", (string)null);
+                    b.ToTable("WEB PromotionCountries", (string)null);
                 });
 
             modelBuilder.Entity("TrungHieuTourists.Promotions.PromotionTour", b =>

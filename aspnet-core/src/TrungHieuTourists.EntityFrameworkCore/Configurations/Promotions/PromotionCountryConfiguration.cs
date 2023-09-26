@@ -12,7 +12,7 @@ namespace TrungHieuTourists.Promotions
     {
         public void Configure(EntityTypeBuilder<PromotionCountry> builder)
         {
-            builder.ToTable(TrungHieuTouristsConsts.DbTablePrefix + " PromotionCountries");
+            builder.ToTable(TrungHieuTouristsConsts.DbTablePrefix + "PromotionCountries");
             builder.HasKey(x => x.Id);
         }
     }
