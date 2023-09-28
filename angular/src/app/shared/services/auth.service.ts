@@ -1,9 +1,10 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
-import { LoginResponseDto } from "../model/login-response.dto";
-import { LoginRequestDto } from "../model/login-request.dto";
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { LoginRequestDto } from '../model/login-request.dto';
+import { LoginResponseDto } from '../model/login-response.dto';
 
 @Injectable({
     providedIn: 'root',

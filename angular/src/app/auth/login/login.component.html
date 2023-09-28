@@ -15,15 +15,15 @@
           <span class="text-600 font-medium">Đăng nhập</span>
         </div>
 
-        <div [formGroup]="loginForm">
+        <div class="w-full md:w-10 mx-auto" [formGroup]="loginForm">
           <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
           <input
             id="email1"
             formControlName="username"
             type="text"
-            placeholder="Địa chỉ Email"
+            placeholder="Địa chỉ email"
             pInputText
-            class="w-full md:w-30rem mb-5"
+            class="w-full mb-3"
             style="padding: 1rem"
           />
 
@@ -33,18 +33,15 @@
             formControlName="password"
             placeholder="Mật khẩu"
             [toggleMask]="true"
-            styleClass="mb-5"
-            inputStyleClass="w-full p-3 md:w-30rem"
+            styleClass="w-full mb-3"
           ></p-password>
 
-          <div class="flex align-items-center justify-content-between mb-5 gap-5"></div>
           <button
             pButton
-            pRipple 
+            pRipple
             (click)="login()"
             label="Đăng nhập"
             class="w-full p-3 text-xl"
-            [routerLink]="['/']"
           ></button>
         </div>
       </div>
