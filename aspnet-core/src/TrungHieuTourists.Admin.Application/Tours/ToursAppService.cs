@@ -39,11 +39,11 @@ namespace TrungHieuTourists.Admin.Tours
             return ObjectMapper.Map<List<Tour>, List<TourInListDto>>(data);
         }
 
-        public async Task<PagedResultDto<TourInListDto>> GetListFilterAsync(BaseListFilterDto input)
+        public async Task<PagedResultDto<TourInListDto>> GetListFilterAsync(TourListFilterDto input)
         {
             var query = await Repository.GetQueryableAsync();
             query = query.WhereIf(!string.IsNullOrWhiteSpace(input.Keyword), x => x.Name.Contains(input.Keyword));
-
+            query = query.WhereIf(input.CategoryId.HasValue, x => x.CategoryId == input.CategoryId);
             var totalCount = await AsyncExecuter.LongCountAsync(query);
             var data = await AsyncExecuter.ToListAsync(query.Skip(input.SkipCount).Take(input.MaxResultCount));
 

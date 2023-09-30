@@ -14,7 +14,7 @@ namespace TrungHieuTourists.Admin.Tours
         CreateUpdateTourDto,
         CreateUpdateTourDto>
     {
-        Task<PagedResultDto<TourInListDto>> GetListFilterAsync(BaseListFilterDto input);
+        Task<PagedResultDto<TourInListDto>> GetListFilterAsync(TourListFilterDto input);
         Task<List<TourInListDto>> GetListAllAsync();
         Task DeleteMultipleAsync(IEnumerable<Guid> ids);
     }

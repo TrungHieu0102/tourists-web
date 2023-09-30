@@ -1,5 +1,6 @@
 import type { TourType } from '../trung-hieu-tourists/tours/tour-type.enum';
 import type { EntityDto } from '@abp/ng.core';
+import type { BaseListFilterDto } from '../models';
 
 export interface CreateUpdateTourDto {
   countryId?: string;
@@ -41,4 +42,8 @@ export interface TourInListDto extends EntityDto<string> {
   isActive: boolean;
   categoryId?: string;
   thumbnailPicture?: string;
+}
+
+export interface TourListFilterDto extends BaseListFilterDto {
+  categoryId?: string;
 }

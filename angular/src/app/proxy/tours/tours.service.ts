@@ -1,8 +1,7 @@
-import type { CreateUpdateTourDto, TourDto, TourInListDto } from './models';
+import type { CreateUpdateTourDto, TourDto, TourInListDto, TourListFilterDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
-import type { BaseListFilterDto } from '../models';
 
 @Injectable({
   providedIn: 'root',
@@ -62,11 +61,11 @@ export class ToursService {
     { apiName: this.apiName,...config });
   
 
-  getListFilter = (input: BaseListFilterDto, config?: Partial<Rest.Config>) =>
+  getListFilter = (input: TourListFilterDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, PagedResultDto<TourInListDto>>({
       method: 'GET',
       url: '/api/app/tours/filter',
-      params: { keyword: input.keyword, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
+      params: { categoryId: input.categoryId, keyword: input.keyword, skipCount: input.skipCount, maxResultCount: input.maxResultCount },
     },
     { apiName: this.apiName,...config });
   
