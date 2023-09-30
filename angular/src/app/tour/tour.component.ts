@@ -47,13 +47,27 @@ export class TourComponent implements OnInit, OnDestroy {
         next: (response: PagedResultDto<TourInListDto>) => {
           this.items = response.items;
           this.totalCount = response.totalCount;
+          this.toggleBlockUI(false);
+
         },
-        error: () => {},
+        error: () => {
+          this.toggleBlockUI(false);
+
+        },
       });
   }
   pageChanged(event: any): void {
     this.skipCount = (event.page - 1) * this.maxResultCount;
     this.maxResultCount = event.rows;
     this.loadData();
+  }
+  private toggleBlockUI(enabled: boolean){
+    if(enabled == true){
+      this.blockedPanel = true;
+    }else{
+      setTimeout(()=>{
+        this.blockedPanel = false;
+      },500);
+    }
   }
 }
