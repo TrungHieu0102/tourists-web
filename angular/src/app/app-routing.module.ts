@@ -10,6 +10,11 @@ const routes: Routes = [
     component: AppLayoutComponent
   },
   {
+    path: 'tour',
+    loadChildren: () => import('./tour/tour.module').then(m => m.TourModule),
+    component: AppLayoutComponent
+  },
+  {
     path: 'auth',   
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),    
   },  
