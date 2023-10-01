@@ -85,7 +85,7 @@ public class TrungHieuTouristsDbMigrationService : ITransientDependency
         Logger.LogInformation("You can safely end this process...");
     }
 
-    private async Task MigrateDatabaseSchemaAsync(Tenant? tenant = null)
+    private async Task MigrateDatabaseSchemaAsync(Tenant tenant = null)
     {
         Logger.LogInformation(
             $"Migrating schema for {(tenant == null ? "host" : tenant.Name + " tenant")} database...");
@@ -96,7 +96,7 @@ public class TrungHieuTouristsDbMigrationService : ITransientDependency
         }
     }
 
-    private async Task SeedDataAsync(Tenant? tenant = null)
+    private async Task SeedDataAsync(Tenant tenant = null)
     {
         Logger.LogInformation($"Executing {(tenant == null ? "host" : tenant.Name + " tenant")} database seed...");
 
@@ -184,7 +184,7 @@ public class TrungHieuTouristsDbMigrationService : ITransientDependency
         }
     }
 
-    private string? GetEntityFrameworkCoreProjectFolderPath()
+    private string GetEntityFrameworkCoreProjectFolderPath()
     {
         var slnDirectoryPath = GetSolutionDirectoryPath();
 
@@ -199,7 +199,7 @@ public class TrungHieuTouristsDbMigrationService : ITransientDependency
             .FirstOrDefault(d => d.EndsWith(".EntityFrameworkCore"));
     }
 
-    private string? GetSolutionDirectoryPath()
+    private string GetSolutionDirectoryPath()
     {
         var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
 

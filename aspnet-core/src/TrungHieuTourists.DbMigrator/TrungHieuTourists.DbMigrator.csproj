@@ -22,6 +22,10 @@
   </ItemGroup>
 
   <ItemGroup>    
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>    
     <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
@@ -32,8 +36,6 @@
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Autofac" Version="7.3.3" />
     <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="7.3.3" />
-    <ProjectReference Include="..\TrungHieuTourists.Application.Contracts\TrungHieuTourists.Application.Contracts.csproj" />
-    <ProjectReference Include="..\TrungHieuTourists.EntityFrameworkCore\TrungHieuTourists.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +43,11 @@
     <Content Remove="Logs\**" />
     <EmbeddedResource Remove="Logs\**" />
     <None Remove="Logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TrungHieuTourists.Application.Contracts\TrungHieuTourists.Application.Contracts.csproj" />
+    <ProjectReference Include="..\TrungHieuTourists.EntityFrameworkCore\TrungHieuTourists.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

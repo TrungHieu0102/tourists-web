@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+ 
+    <RootNamespace>TrungHieuTourists.Admin</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TrungHieuTourists.Admin.Application\TrungHieuTourists.Admin.Application.csproj" />
+    <ProjectReference Include="..\TrungHieuTourists.Domain.Tests\TrungHieuTourists.Domain.Tests.csproj" />
+  </ItemGroup>
+
+</Project>

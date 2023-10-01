@@ -56,7 +56,7 @@ public class TrungHieuTouristsAuthServerModule : AbpModule
         {
             builder.AddValidation(options =>
             {
-                options.AddAudiences("TrungHieuTourists");
+                options.AddAudiences("TrungHieuTourists", "TrungHieuTourists.Admin");
                 options.UseLocalServer();
                 options.UseAspNetCore();
             });

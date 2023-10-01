@@ -7,6 +7,7 @@ using TrungHieuTourists.Data;
 using Serilog;
 using Volo.Abp;
 using Volo.Abp.Data;
+using TrungHieuTourists.Seeding;
 
 namespace TrungHieuTourists.DbMigrator;
 
@@ -37,7 +38,10 @@ public class DbMigratorHostedService : IHostedService
                 .ServiceProvider
                 .GetRequiredService<TrungHieuTouristsDbMigrationService>()
                 .MigrateAsync();
-
+            await application
+              .ServiceProvider
+              .GetRequiredService<IdentityDataSeeder>()
+              .SeedAsync("hieuadmin@gmail.com","113579hiem");
             await application.ShutdownAsync();
 
             _hostApplicationLifetime.StopApplication();
