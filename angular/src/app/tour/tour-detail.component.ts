@@ -12,21 +12,34 @@ import { Subject, takeUntil } from 'rxjs';
 export class TourDetailComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   blockedPanel: boolean = false;
-
+  btnDisabled = false;
   public form: FormGroup;
 
   //Dropdown
   tourCategories: any[] = [];
-  countries: any[] =[];
+  countries: any[] = [];
   tourTypes: any[] = [];
   selectedEntity = {} as TourDto;
 
   constructor(
-    private tourService:ToursService,
+    private tourService: ToursService,
     private tourCategoryService: TourCategoriesService,
     private fb: FormBuilder
   ) {}
-
+  validationMessages = {
+    code: [{ type: 'required', message: 'Bạn phải nhập mã duy nhất' }],
+    name: [
+      { type: 'required', message: 'Bạn phải nhập tên' },
+      { type: 'maxlength', message: 'Bạn không được nhập quá 255 kí tự' },
+    ],
+    slug: [{ type: 'required', message: 'Bạn phải URL duy nhất' }],
+    sku: [{ type: 'required', message: 'Bạn phải mã SKU sản phẩm' }],
+    countryId: [{ type: 'required', message: 'Bạn phải chọn quốc gia' }],
+    categoryId: [{ type: 'required', message: 'Bạn phải chọn danh mục' }],
+    tourType: [{ type: 'required', message: 'Bạn phải chọn loại tour' }],
+    sortOrder: [{ type: 'required', message: 'Bạn phải nhập thứ tự' }],
+    sellPrice: [{ type: 'required', message: 'Bạn phải nhập giá bán' }],
+  };
   ngOnDestroy(): void {}
 
   ngOnInit(): void {
@@ -49,10 +62,7 @@ export class TourDetailComponent implements OnInit, OnDestroy {
         },
       });
   }
-  saveChange(){
-
-
-  }
+  saveChange() {}
   loadTourCategories() {
     this.tourCategoryService.getListAll().subscribe((response: TourCategoryInListDto[]) => {
       response.forEach(element => {
@@ -75,8 +85,8 @@ export class TourDetailComponent implements OnInit, OnDestroy {
       tourType: new FormControl(this.selectedEntity.tourType || null, Validators.required),
       sortOrder: new FormControl(this.selectedEntity.sortOrder || null, Validators.required),
       sellPrice: new FormControl(this.selectedEntity.sellPrice || null, Validators.required),
-      visibility: new FormControl(this.selectedEntity.visibility || false),
-      isActive: new FormControl(this.selectedEntity.isActive || false),
+      visibility: new FormControl(this.selectedEntity.visibility || true),
+      isActive: new FormControl(this.selectedEntity.isActive || true),
       seoMetaDescription: new FormControl(this.selectedEntity.seoMetaDescription || null),
       description: new FormControl(this.selectedEntity.description || null),
     });
@@ -85,10 +95,12 @@ export class TourDetailComponent implements OnInit, OnDestroy {
   private toggleBlockUI(enabled: boolean) {
     if (enabled == true) {
       this.blockedPanel = true;
+      this.btnDisabled = true;
     } else {
       setTimeout(() => {
         this.blockedPanel = false;
-      }, 1000);
+        this.btnDisabled = false;
+      }, 500);
     }
   }
 }

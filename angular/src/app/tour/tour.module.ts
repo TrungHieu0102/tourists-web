@@ -16,6 +16,7 @@ import {InputNumberModule} from 'primeng/inputnumber';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {EditorModule} from 'primeng/editor';
+import { TourSharedModule } from '../shared/modules/tour-shared.module';
 
 @NgModule({
   declarations: [TourComponent,TourDetailComponent],
@@ -35,7 +36,8 @@ import {EditorModule} from 'primeng/editor';
     InputNumberModule,
     CheckboxModule,
     InputTextareaModule,
-    EditorModule
+    EditorModule,
+    TourSharedModule
   ],
 })
 export class TourModule {}
