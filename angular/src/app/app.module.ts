@@ -17,6 +17,9 @@ import { APP_ROUTE_PROVIDER } from './route.provider';
 import { FeatureManagementModule } from '@abp/ng.feature-management';
 import { AbpOAuthModule } from '@abp/ng.oauth';
 import { AppLayoutModule } from './layout/app.layout.module';
+import { MessageService } from 'primeng/api';
+import { NotificationService } from './shared/services/notification.service';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @NgModule({
   imports: [
@@ -39,7 +42,7 @@ import { AppLayoutModule } from './layout/app.layout.module';
     FeatureManagementModule.forRoot(),
   ],
   declarations: [AppComponent],
-  providers: [APP_ROUTE_PROVIDER],
+  providers: [APP_ROUTE_PROVIDER, DialogService, MessageService, NotificationService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

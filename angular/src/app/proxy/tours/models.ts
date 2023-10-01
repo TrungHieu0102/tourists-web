@@ -12,6 +12,7 @@ export interface CreateUpdateTourDto {
   sortOrder: number;
   visibility: boolean;
   isActive: boolean;
+  sellPrice: number;
   categoryId?: string;
   seoMetaDescription?: string;
   description?: string;
@@ -19,14 +20,20 @@ export interface CreateUpdateTourDto {
 }
 
 export interface TourDto {
+  countryId: null;
   name?: string;
   code?: string;
   slug?: string;
+  tourType: TourType;
+  sku?: string;
   sortOrder: number;
   visibility: boolean;
   isActive: boolean;
-  parentId?: string;
+  categoryId?: string;
   seoMetaDescription?: string;
+  description?: string;
+  thumbnailPicture?: string;
+  sellPrice: number;
   id?: string;
 }
 

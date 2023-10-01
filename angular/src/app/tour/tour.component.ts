@@ -1,8 +1,11 @@
 import { AuthService, PagedResultDto } from '@abp/ng.core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TourCategoriesService } from '@proxy/tour-categories';
-import { TourInListDto, ToursService } from '@proxy/tours';
+import { TourCategoriesService, TourCategoryInListDto } from '@proxy/tour-categories';
+import { TourDto,TourInListDto, ToursService } from '@proxy/tours';
 import { Subject, takeUntil } from 'rxjs';
+import { NotificationService } from '../shared/services/notification.service';
+import { TourDetailComponent } from './tour-detail.component';
+import { DialogService } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-tour',
@@ -20,12 +23,15 @@ export class TourComponent implements OnInit, OnDestroy {
 
   //Filter
   tourCategories: any[] = [];
+  
   keyword: string = '';
   categoryId: string = '';
 
   constructor(
     private tourService: ToursService,
-    private tourCategoryService: TourCategoriesService
+    private tourCategoryService: TourCategoriesService,
+    private dialogService: DialogService,
+    private notificationService: NotificationService
   ) {}
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
@@ -56,10 +62,33 @@ export class TourComponent implements OnInit, OnDestroy {
         },
       });
   }
+  loadTourCategories() {
+    this.tourCategoryService.getListAll().subscribe((response: TourCategoryInListDto[]) => {
+      response.forEach(element => {
+        this.tourCategories.push({
+          value: element.id,
+          name: element.name,
+        });
+      });
+    });
+  }
   pageChanged(event: any): void {
     this.skipCount = (event.page - 1) * this.maxResultCount;
     this.maxResultCount = event.rows;
     this.loadData();
+  }
+  showAddModal() {
+    const ref = this.dialogService.open(TourDetailComponent, {
+      header: 'Thêm mới tour',
+      width: '70%',
+    });
+
+    ref.onClose.subscribe((data:TourDto) => {
+      if (data) {
+        this.loadData();
+        this.notificationService.showSuccess("Thêm tour thành công");
+      }
+    });
   }
   private toggleBlockUI(enabled: boolean){
     if(enabled == true){

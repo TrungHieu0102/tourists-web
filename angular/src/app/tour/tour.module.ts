@@ -10,9 +10,15 @@ import { ButtonModule } from 'primeng/button';
 import {DropdownModule} from 'primeng/dropdown';
 import {InputTextModule} from 'primeng/inputtext';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
+import { TourDetailComponent } from './tour-detail.component';
+import {InputNumberModule} from 'primeng/inputnumber';
+import {CheckboxModule} from 'primeng/checkbox';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {EditorModule} from 'primeng/editor';
 
 @NgModule({
-  declarations: [TourComponent],
+  declarations: [TourComponent,TourDetailComponent],
   imports: [
     SharedModule,
     TourRoutingModule,
@@ -23,7 +29,13 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner';
     ButtonModule,
     DropdownModule,
     InputTextModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ProgressSpinnerModule,
+    DynamicDialogModule,
+    InputNumberModule,
+    CheckboxModule,
+    InputTextareaModule,
+    EditorModule
   ],
 })
 export class TourModule {}
