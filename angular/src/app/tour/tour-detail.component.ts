@@ -1,9 +1,12 @@
-import { PagedResultDto } from '@abp/ng.core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TourCategoriesService, TourCategoryInListDto } from '@proxy/tour-categories';
-import { TourDto, TourInListDto, ToursService } from '@proxy/tours';
-import { Subject, takeUntil } from 'rxjs';
+import { TourDto, ToursService } from '@proxy/tours';
+import { Subject, forkJoin, takeUntil } from 'rxjs';
+import { CountryInListDto, CountriesService } from '@proxy/countries';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { UtilityService } from '../shared/services/utility.service';
+import { tourTypeOptions } from '@proxy/trung-hieu-tourists/tours';
 
 @Component({
   selector: 'app-tour-detail',
@@ -24,7 +27,11 @@ export class TourDetailComponent implements OnInit, OnDestroy {
   constructor(
     private tourService: ToursService,
     private tourCategoryService: TourCategoriesService,
-    private fb: FormBuilder
+    private countriesService: CountriesService,
+    private fb: FormBuilder,
+    private config: DynamicDialogConfig,
+    private ref: DynamicDialogRef,
+    private utilService: UtilityService
   ) {}
   validationMessages = {
     code: [{ type: 'required', message: 'Bạn phải nhập mã duy nhất' }],
@@ -44,8 +51,51 @@ export class TourDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.buildForm();
+    this.loadTourTypes();
+    this.initFormData();
   }
-
+  generateSlug() {
+    this.form.controls['slug'].setValue(this.utilService.MakeSeoTitle(this.form.get('name').value));
+  }
+  initFormData() {
+    //Load data to form
+    var tourCategories = this.tourCategoryService.getListAll();
+    var countries = this.countriesService.getListAll();
+    this.toggleBlockUI(true);
+    forkJoin({
+      tourCategories,
+      countries,
+    })
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response: any) => {
+          //Push data to dropdown
+          var tourCategories = response.tourCategories as TourCategoryInListDto[];
+          var countries = response.countries as CountryInListDto[];
+          tourCategories.forEach(element => {
+            this.tourCategories.push({
+              value: element.id,
+              label: element.name,
+            });
+          });
+          countries.forEach(element => {
+            this.countries.push({
+              value: element.id,
+              label: element.name,
+            });
+          });
+          //Load edit data to form
+          if (this.utilService.isEmpty(this.config.data?.id) == true) {
+            this.toggleBlockUI(false);
+          } else {
+            this.loadFormDetails(this.config.data?.id);
+          }
+        },
+        error: () => {
+          this.toggleBlockUI(false);
+        },
+      });
+  }
   loadFormDetails(id: string) {
     this.toggleBlockUI(true);
     this.tourService
@@ -62,21 +112,53 @@ export class TourDetailComponent implements OnInit, OnDestroy {
         },
       });
   }
-  saveChange() {}
-  loadTourCategories() {
-    this.tourCategoryService.getListAll().subscribe((response: TourCategoryInListDto[]) => {
-      response.forEach(element => {
-        this.tourCategories.push({
-          value: element.id,
-          name: element.name,
+  saveChange() {
+    this.toggleBlockUI(true);
+
+    if (this.utilService.isEmpty(this.config.data?.id) == true) {
+      this.tourService
+        .create(this.form.value)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe({
+          next: () => {
+            this.toggleBlockUI(false);
+
+            this.ref.close(this.form.value);
+          },
+          error: () => {
+            this.toggleBlockUI(false);
+          },
         });
+    } else {
+      this.tourService
+        .update(this.config.data?.id, this.form.value)
+        .pipe(takeUntil(this.ngUnsubscribe))
+        .subscribe({
+          next: () => {
+            this.toggleBlockUI(false);
+            this.ref.close(this.form.value);
+          },
+          error: () => {
+            this.toggleBlockUI(false);
+          },
+        });
+    }
+  }
+  loadTourTypes() {
+    tourTypeOptions.forEach(element => {
+      this.tourTypes.push({
+        value: element.value,
+        label: element.key,
       });
     });
   }
 
   private buildForm() {
     this.form = this.fb.group({
-      name: new FormControl(this.selectedEntity.name || null, Validators.required),
+      name: new FormControl(
+        this.selectedEntity.name || null,
+        Validators.compose([Validators.required, Validators.maxLength(250)])
+      ),
       code: new FormControl(this.selectedEntity.code || null, Validators.required),
       slug: new FormControl(this.selectedEntity.slug || null, Validators.required),
       sku: new FormControl(this.selectedEntity.sku || null, Validators.required),

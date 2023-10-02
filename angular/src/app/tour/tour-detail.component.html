@@ -4,12 +4,12 @@
     <div class="formgrid grid">
       <div class="field col-12">
         <label for="name" class="block">Tên <span class="required">*</span></label>
-        <input id="name" pInputText type="text" class="w-full" formControlName="name" />
+        <input id="name" pInputText (keyup)="generateSlug()" type="text" class="w-full" formControlName="name" />
         <app-validation-message
-        [entityForm]="form"
-        fieldName="name"
-        [validationMessages]="validationMessages"
-      ></app-validation-message>
+          [entityForm]="form"
+          fieldName="name"
+          [validationMessages]="validationMessages"
+        ></app-validation-message>
       </div>
       <div class="field col-12">
         <label for="code" class="block">Code <span class="required">*</span></label>
@@ -83,7 +83,7 @@
         ></p-dropdown>
         <app-validation-message
           [entityForm]="form"
-          fieldName="productType"
+          fieldName="tourType"
           [validationMessages]="validationMessages"
         ></app-validation-message>
        

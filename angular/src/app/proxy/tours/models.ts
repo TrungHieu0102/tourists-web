@@ -20,7 +20,7 @@ export interface CreateUpdateTourDto {
 }
 
 export interface TourDto {
-  countryId: null;
+  countryId?: string;
   name?: string;
   code?: string;
   slug?: string;

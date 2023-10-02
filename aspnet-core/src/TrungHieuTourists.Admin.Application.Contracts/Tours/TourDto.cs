@@ -8,7 +8,7 @@ namespace TrungHieuTourists.Admin.Tours
 {
     public class TourDto : IEntityDto<Guid>
     {
-
+        public Guid CountryId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string Slug { get; set; }
