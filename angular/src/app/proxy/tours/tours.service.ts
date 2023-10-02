@@ -70,6 +70,16 @@ export class ToursService {
     { apiName: this.apiName,...config });
   
 
+  getThumbnailImage = (fileName: string, config?: Partial<Rest.Config>) =>
+    this.restService.request<any, string>({
+      method: 'GET',
+      responseType: 'text',
+      url: '/api/app/tours/thumbnail-image',
+      params: { fileName },
+    },
+    { apiName: this.apiName,...config });
+  
+
   update = (id: string, input: CreateUpdateTourDto, config?: Partial<Rest.Config>) =>
     this.restService.request<any, TourDto>({
       method: 'PUT',

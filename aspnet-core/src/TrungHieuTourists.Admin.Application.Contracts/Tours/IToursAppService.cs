@@ -17,5 +17,6 @@ namespace TrungHieuTourists.Admin.Tours
         Task<PagedResultDto<TourInListDto>> GetListFilterAsync(TourListFilterDto input);
         Task<List<TourInListDto>> GetListAllAsync();
         Task DeleteMultipleAsync(IEnumerable<Guid> ids);
+        Task<string> GetThumbnailImageAsync(string fileName);
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TourCategoriesService, TourCategoryInListDto } from '@proxy/tour-categories';
 import { TourDto, ToursService } from '@proxy/tours';
@@ -6,7 +6,9 @@ import { Subject, forkJoin, takeUntil } from 'rxjs';
 import { CountryInListDto, CountriesService } from '@proxy/countries';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { UtilityService } from '../shared/services/utility.service';
-import { tourTypeOptions } from '@proxy/trung-hieu-tourists/tours';
+import { TourType, tourTypeOptions } from '@proxy/trung-hieu-tourists/tours';
+import { NotificationService } from '../shared/services/notification.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tour-detail',
@@ -17,6 +19,7 @@ export class TourDetailComponent implements OnInit, OnDestroy {
   blockedPanel: boolean = false;
   btnDisabled = false;
   public form: FormGroup;
+  public thumbnailImage;
 
   //Dropdown
   tourCategories: any[] = [];
@@ -31,7 +34,10 @@ export class TourDetailComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private config: DynamicDialogConfig,
     private ref: DynamicDialogRef,
-    private utilService: UtilityService
+    private utilService: UtilityService,
+    private notificationSerivce: NotificationService,
+    private cd: ChangeDetectorRef,
+    private sanitizer: DomSanitizer
   ) {}
   validationMessages = {
     code: [{ type: 'required', message: 'Bạn phải nhập mã duy nhất' }],
@@ -47,7 +53,13 @@ export class TourDetailComponent implements OnInit, OnDestroy {
     sortOrder: [{ type: 'required', message: 'Bạn phải nhập thứ tự' }],
     sellPrice: [{ type: 'required', message: 'Bạn phải nhập giá bán' }],
   };
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    if (this.ref) {
+      this.ref.close();
+    }
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
   ngOnInit(): void {
     this.buildForm();
@@ -104,6 +116,7 @@ export class TourDetailComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (response: TourDto) => {
           this.selectedEntity = response;
+          this.loadThumbnail(this.selectedEntity.thumbnailPicture);
           this.buildForm();
           this.toggleBlockUI(false);
         },
@@ -125,7 +138,8 @@ export class TourDetailComponent implements OnInit, OnDestroy {
 
             this.ref.close(this.form.value);
           },
-          error: () => {
+          error: err => {
+            this.notificationSerivce.showError(err.error.error.message);
             this.toggleBlockUI(false);
           },
         });
@@ -138,7 +152,8 @@ export class TourDetailComponent implements OnInit, OnDestroy {
             this.toggleBlockUI(false);
             this.ref.close(this.form.value);
           },
-          error: () => {
+          error: err => {
+            this.notificationSerivce.showError(err.error.error.message);
             this.toggleBlockUI(false);
           },
         });
@@ -171,7 +186,23 @@ export class TourDetailComponent implements OnInit, OnDestroy {
       isActive: new FormControl(this.selectedEntity.isActive || true),
       seoMetaDescription: new FormControl(this.selectedEntity.seoMetaDescription || null),
       description: new FormControl(this.selectedEntity.description || null),
+      thumbnailPictureName: new FormControl(this.selectedEntity.description || null),
+      thumbnailPictureContent: new FormControl(null),
     });
+  }
+
+  loadThumbnail(fileName: string) {
+    this.tourService
+      .getThumbnailImage(fileName)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe({
+        next: (response: string) => {
+          var fileExt = this.selectedEntity.thumbnailPicture?.split('.').pop();
+          this.thumbnailImage = this.sanitizer.bypassSecurityTrustResourceUrl(
+            `data:image/${fileExt};base64, ${response}`
+          );
+        },
+      });
   }
 
   private toggleBlockUI(enabled: boolean) {
@@ -183,6 +214,23 @@ export class TourDetailComponent implements OnInit, OnDestroy {
         this.blockedPanel = false;
         this.btnDisabled = false;
       }, 500);
+    }
+  }
+  onFileChange(event) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.form.patchValue({
+          thumbnailPictureName: file.name,
+          thumbnailPictureContent: reader.result,
+        });
+
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      };
     }
   }
 }

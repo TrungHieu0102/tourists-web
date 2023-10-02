@@ -6,6 +6,7 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { NotificationService } from '../shared/services/notification.service';
 import { TourDetailComponent } from './tour-detail.component';
+import { TourType } from '@proxy/trung-hieu-tourists/tours';
 
 @Component({
   selector: 'app-tour',
@@ -119,6 +120,9 @@ export class TourComponent implements OnInit, OnDestroy {
         this.notificationService.showSuccess('Thêm tour thành công');
       }
     });
+  }
+  getTourTypeName(value: number){
+    return TourType[value];
   }
 
   private toggleBlockUI(enabled: boolean) {

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TrungHieuTourists.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
@@ -12,9 +13,11 @@ using Volo.Abp.EntityFrameworkCore;
 namespace TrungHieuTourists.Migrations
 {
     [DbContext(typeof(TrungHieuTouristsDbContext))]
-    partial class TrungHieuTouristsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231002071342_AddCategoryFieldInProduct")]
+    partial class AddCategoryFieldInProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -660,14 +663,6 @@ namespace TrungHieuTourists.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CategoryName")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
-                    b.Property<string>("CategorySlug")
-                        .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)");
-
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -682,6 +677,14 @@ namespace TrungHieuTourists.Migrations
 
                     b.Property<Guid>("CountryId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CreategoryName")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<string>("CreategorySlug")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime2")

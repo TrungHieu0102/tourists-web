@@ -18,6 +18,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {EditorModule} from 'primeng/editor';
 import { TourSharedModule } from '../shared/modules/tour-shared.module';
 import {BadgeModule} from 'primeng/badge';
+import {ImageModule} from 'primeng/image';
 
 @NgModule({
   declarations: [TourComponent,TourDetailComponent],
@@ -39,7 +40,8 @@ import {BadgeModule} from 'primeng/badge';
     InputTextareaModule,
     EditorModule,
     TourSharedModule,
-    BadgeModule
+    BadgeModule,
+    ImageModule
   ],
 })
 export class TourModule {}

@@ -16,7 +16,8 @@ export interface CreateUpdateTourDto {
   categoryId?: string;
   seoMetaDescription?: string;
   description?: string;
-  thumbnailPicture?: string;
+  thumbnailPictureName?: string;
+  thumbnailPictureContent?: string;
 }
 
 export interface TourDto {
@@ -35,6 +36,8 @@ export interface TourDto {
   thumbnailPicture?: string;
   sellPrice: number;
   id?: string;
+  categoryName?: string;
+  categorySlug?: string;
 }
 
 export interface TourInListDto extends EntityDto<string> {
@@ -49,6 +52,8 @@ export interface TourInListDto extends EntityDto<string> {
   isActive: boolean;
   categoryId?: string;
   thumbnailPicture?: string;
+  categoryName?: string;
+  categorySlug?: string;
 }
 
 export interface TourListFilterDto extends BaseListFilterDto {
