@@ -19,6 +19,7 @@ import {EditorModule} from 'primeng/editor';
 import { TourSharedModule } from '../shared/modules/tour-shared.module';
 import {BadgeModule} from 'primeng/badge';
 import {ImageModule} from 'primeng/image';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [TourComponent,TourDetailComponent],
@@ -41,7 +42,8 @@ import {ImageModule} from 'primeng/image';
     EditorModule,
     TourSharedModule,
     BadgeModule,
-    ImageModule
+    ImageModule,
+    ConfirmDialogModule
   ],
 })
 export class TourModule {}

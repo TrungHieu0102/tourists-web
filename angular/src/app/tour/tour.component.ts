@@ -7,6 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { NotificationService } from '../shared/services/notification.service';
 import { TourDetailComponent } from './tour-detail.component';
 import { TourType } from '@proxy/trung-hieu-tourists/tours';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-tour',
@@ -33,7 +34,8 @@ export class TourComponent implements OnInit, OnDestroy {
     private tourService: ToursService,
     private tourCategoryService: TourCategoriesService,
     private dialogService: DialogService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnDestroy(): void {
@@ -112,14 +114,43 @@ export class TourComponent implements OnInit, OnDestroy {
       header: 'Cập nhật tour',
       width: '70%',
     });
-
     ref.onClose.subscribe((data: TourDto) => {
       if (data) {
         this.loadData();
         this.selectedItems = [];
-        this.notificationService.showSuccess('Thêm tour thành công');
+        this.notificationService.showSuccess('Cập nhật tour thành công');
       }
     });
+  }
+  deleteItems(){
+    if(this.selectedItems.length == 0){
+      this.notificationService.showError("Phải chọn ít nhất một bản ghi");
+      return;
+    }
+    var ids =[];
+    this.selectedItems.forEach(element=>{
+      ids.push(element.id);
+    });
+    this.confirmationService.confirm({
+      message:'Bạn có chắc muốn xóa bản ghi này?',
+      accept:()=>{
+        this.deleteItemsConfirmed(ids);
+      }
+    })
+  }
+  deleteItemsConfirmed(ids: string[]){
+    this.toggleBlockUI(true);
+    this.tourService.deleteMultiple(ids).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+      next: ()=>{
+        this.notificationService.showSuccess("Xóa thành công");
+        this.loadData();
+        this.selectedItems = [];
+        this.toggleBlockUI(false);
+      },
+      error:()=>{
+        this.toggleBlockUI(false);
+      }
+    })
   }
   getTourTypeName(value: number){
     return TourType[value];
