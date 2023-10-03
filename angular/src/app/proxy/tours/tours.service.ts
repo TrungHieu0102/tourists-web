@@ -70,6 +70,15 @@ export class ToursService {
     { apiName: this.apiName,...config });
   
 
+  getSuggestNewCode = (config?: Partial<Rest.Config>) =>
+    this.restService.request<any, string>({
+      method: 'GET',
+      responseType: 'text',
+      url: '/api/app/tours/suggest-new-code',
+    },
+    { apiName: this.apiName });
+  
+
   getThumbnailImage = (fileName: string, config?: Partial<Rest.Config>) =>
     this.restService.request<any, string>({
       method: 'GET',

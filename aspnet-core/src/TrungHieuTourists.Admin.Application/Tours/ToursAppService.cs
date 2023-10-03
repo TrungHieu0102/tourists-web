@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Text;
 using System.Threading.Tasks;
 using TrungHieuTourists.TourCategoris;
 using TrungHieuTourists.Tours;
@@ -14,6 +13,7 @@ using Volo.Abp.BlobStoring;
 
 namespace TrungHieuTourists.Admin.Tours
 {
+
     public class ToursAppService : CrudAppService
         <Tour,
         TourDto,
@@ -23,21 +23,36 @@ namespace TrungHieuTourists.Admin.Tours
         CreateUpdateTourDto>, IToursAppService
     {
         private readonly TourManager _tourManager;
+        private readonly TourCodeGenerator _tourCodeGenerator;
         private readonly IRepository<TourCategory> _tourCategoryRepository;
         private readonly IBlobContainer<TourThumbnailPictureContainer> _fileContainer;
         public ToursAppService(IRepository<Tour, Guid> repository,
             IRepository<TourCategory> tourCategoryRepository,
-            TourManager tourManager, IBlobContainer<TourThumbnailPictureContainer> fileContainer)
-           : base(repository)
+            TourManager tourManager,
+            IBlobContainer<TourThumbnailPictureContainer> fileContainer,
+            TourCodeGenerator tourCodeGenerator) : base(repository)
         {
             _tourManager = tourManager;
             _tourCategoryRepository = tourCategoryRepository;
             _fileContainer = fileContainer;
+            _tourCodeGenerator = tourCodeGenerator;
         }
         public override async Task<TourDto> CreateAsync(CreateUpdateTourDto input)
         {
-            var tour = await _tourManager.CreateAsync(input.CountryId, input.Name, input.Code, input.Slug, input.TourType, input.SKU,
-                input.SortOrder, input.Visibility, input.IsActive, input.CategoryId, input.SeoMetaDescription, input.Description, input.SellPrice);
+            var tour = await _tourManager.CreateAsync(
+                input.CountryId,
+                input.Name,
+                input.Code,
+                input.Slug,
+                input.TourType,
+                input.SKU,
+                input.SortOrder,
+                input.Visibility,
+                input.IsActive,
+                input.CategoryId,
+                input.SeoMetaDescription,
+                input.Description,
+                input.SellPrice);
             if (input.ThumbnailPictureContent != null && input.ThumbnailPictureContent.Length > 0)
             {
                 await SaveThumbnailImageAsync(input.ThumbnailPictureName, input.ThumbnailPictureContent);
@@ -133,6 +148,11 @@ namespace TrungHieuTourists.Admin.Tours
             }
             var result = Convert.ToBase64String(thumbnailContent);
             return result;
+        }
+
+        public async Task<string> GetSuggestNewCodeAsync()
+        {
+            return await _tourCodeGenerator.GenerateAsync();
         }
     }
 }

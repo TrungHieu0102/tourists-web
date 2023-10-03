@@ -2,6 +2,7 @@
 using TrungHieuTourists.Configurations.TourCategories;
 using TrungHieuTourists.Configurations.Tours;
 using TrungHieuTourists.Countries;
+using TrungHieuTourists.IdentitySettings;
 using TrungHieuTourists.Oders;
 using TrungHieuTourists.Orders;
 using TrungHieuTourists.Promotions;
@@ -87,7 +88,8 @@ public class TrungHieuTouristsDbContext :
     public DbSet<TourAttributeVarchar> TourAttributeVarchars { get; set; }
     public DbSet<TourLink> TourLinks { get; set; }  
     public DbSet<TourReview> TourReviews { get; set; }
-    public DbSet<TourTag> TourTags { get; set; }    
+    public DbSet<TourTag> TourTags { get; set; }
+    public DbSet<IdentitySetting> IdentitySettings { get; set; }
 
 
 
@@ -146,6 +148,8 @@ public class TrungHieuTouristsDbContext :
         builder.ApplyConfiguration(new PromotionCountryConfiguration());
         builder.ApplyConfiguration(new PromotionTourConfiguration());
         builder.ApplyConfiguration(new PromotionUsageHistoryConfiguration());
+
+        builder.ApplyConfiguration(new IdentitySettingConfiguration());
 
 
 
