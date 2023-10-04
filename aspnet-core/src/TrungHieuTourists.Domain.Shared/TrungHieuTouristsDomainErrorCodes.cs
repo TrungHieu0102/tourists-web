@@ -11,4 +11,5 @@ public static class TrungHieuTouristsDomainErrorCodes
     public const string TourAttributeIdIsNotExists = "TrungHieuTourists:TourAttributeIdIsNotExists";
 
     public const string TourAttributeValueIsNotValid = "TrungHieuTourists:TourAttributeValueIsNotValid";
+    public const string RoleNameAlreadyExists = "TrungHieuTourists:RoleNameAlreadyExists";
 }
