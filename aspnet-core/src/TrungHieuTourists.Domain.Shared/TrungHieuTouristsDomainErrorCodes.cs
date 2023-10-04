@@ -8,4 +8,7 @@ public static class TrungHieuTouristsDomainErrorCodes
 
     public const string TourSKUAlreadyExists = "TrungHieuTourists:TourSKUAlreadyExists";
     public const string TourIsNotExists = "TrungHieuTourists:TourIsNotExists";
+    public const string TourAttributeIdIsNotExists = "TrungHieuTourists:TourAttributeIdIsNotExists";
+
+    public const string TourAttributeValueIsNotValid = "TrungHieuTourists:TourAttributeValueIsNotValid";
 }

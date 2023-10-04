@@ -71,6 +71,7 @@
       <th>Thứ tự</th>
       <th>Hiển thị</th>
       <th>Kích hoạt</th>
+      <th></th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-row>
@@ -89,9 +90,22 @@
         <p-badge *ngIf="row.visibility == 1" severity="success" value="Hiển thị"></p-badge>
         <p-badge *ngIf="row.visibility == 0" severity="danger" value="Ẩn"></p-badge>
       </td>
+      
       <td>
         <p-badge *ngIf="row.isActive == 1" value="Kích hoạt" severity="success"></p-badge>
         <p-badge *ngIf="row.isActive == 0" value="Khoá" severity="danger"></p-badge>
+      </td>
+      <td>
+        <button
+        pButton
+        pRipple
+        type="button"
+        label="Thuộc tính"
+        icon="fa fa-pencil"
+        class="p-button-text"
+        (click)="manageTourAttribute(row.id)"
+      >
+      </button>
       </td>
     </tr>
   </ng-template>

@@ -28,6 +28,7 @@ import { TokenInterceptor } from './shared/interceptors/token.interceptor';
 import { GlobalHttpInterceptorService } from './shared/interceptors/error-handler.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -67,7 +68,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     MessageService,
     NotificationService,
     UtilityService,
-    ConfirmationService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent],
 })

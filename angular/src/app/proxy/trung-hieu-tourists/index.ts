@@ -1,2 +1,3 @@
+import * as TourAttributes from './tour-attributes';
 import * as Tours from './tours';
-export { Tours };
+export { TourAttributes, Tours };

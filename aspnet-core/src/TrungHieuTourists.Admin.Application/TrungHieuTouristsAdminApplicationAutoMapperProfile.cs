@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using TrungHieuTourists.Admin.Countries;
+using TrungHieuTourists.Admin.TourAttributes;
 using TrungHieuTourists.Admin.TourCategories;
 using TrungHieuTourists.Admin.Tours;
 using TrungHieuTourists.Countries;
+using TrungHieuTourists.TourAttributes;
 using TrungHieuTourists.TourCategoris;
 using TrungHieuTourists.Tours;
 
@@ -28,6 +30,11 @@ public class TrungHieuTouristsAdminApplicationAutoMapperProfile : Profile
         CreateMap<Country, CountryDto>();
         CreateMap<Country, CountryInListDto>();
         CreateMap<CreateUpdateCountryDto, Country>();
+        //Tour attribute
+        CreateMap<TourAttribute, TourAttributeDto>();
+        CreateMap<TourAttribute, TourAttributeInListDto>();
+        CreateMap<CreateUpdateTourAttributeDto, TourAttribute>();
+
 
     }
 }

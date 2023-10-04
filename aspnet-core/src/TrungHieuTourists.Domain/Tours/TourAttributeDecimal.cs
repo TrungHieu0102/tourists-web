@@ -9,9 +9,16 @@ namespace TrungHieuTourists.Tours
 {
     public class TourAttributeDecimal: Entity<Guid>
     {
-        public Guid AttribiteId { get; set; }
+        public TourAttributeDecimal(Guid id, Guid attributeId, Guid tourId, decimal value)
+        {
+            Id = id;
+            AttributeId = attributeId;
+            TourId = tourId;
+            Value = value;
+        }
+        public Guid AttributeId { get; set; }
         public Guid TourId { get; set; }
-        public decimal? Value { get; set; }
+        public decimal Value { get; set; }
 
     }
 }
