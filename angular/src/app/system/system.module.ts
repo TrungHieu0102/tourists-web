@@ -17,13 +17,22 @@ import { BadgeModule } from 'primeng/badge';
 import { ImageModule } from 'primeng/image';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { CalendarModule } from 'primeng/calendar';
-import { RoleDetailComponent } from './role-detail.component';
-import { RoleRoutingModule } from './role-routing.module';
-import { RoleComponent } from './role.component';
+import { RoleComponent } from './role/role.component';
+import { RoleDetailComponent } from './role/role-detail.component';
+import { PermissionGrantComponent } from './role/permission-grant.component';
+import { UserComponent } from './user/user.component';
+import { UserDetailComponent } from './user/user-detail.component';
+import { SystemRoutingModule } from './system-routing.module';
 import { TourSharedModule } from '../shared/modules/tour-shared.module';
-import { PermissionGrantComponent } from './permission-grant.component';
+
 @NgModule({
-  declarations: [RoleComponent, RoleDetailComponent, PermissionGrantComponent],
+  declarations: [
+    RoleComponent,
+    RoleDetailComponent,
+    PermissionGrantComponent,
+    UserComponent,
+    UserDetailComponent,
+  ],
   imports: [
     SharedModule,
     PanelModule,
@@ -44,8 +53,8 @@ import { PermissionGrantComponent } from './permission-grant.component';
     ImageModule,
     ConfirmDialogModule,
     CalendarModule,
-    RoleRoutingModule
-
-  ]
+    SystemRoutingModule,
+  ],
+  
 })
-export class RoleModule {}
+export class SystemModule {}

@@ -1,14 +1,16 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TourCategoriesService, TourCategoryInListDto } from '@proxy/tour-categories';
-import { TourDto, ToursService } from '@proxy/tours';
+
 import { Subject, forkJoin, takeUntil } from 'rxjs';
-import { CountryInListDto, CountriesService } from '@proxy/countries';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { UtilityService } from '../shared/services/utility.service';
-import { TourType, tourTypeOptions } from '@proxy/trung-hieu-tourists/tours';
-import { NotificationService } from '../shared/services/notification.service';
+
 import { DomSanitizer } from '@angular/platform-browser';
+import { CountriesService, CountryInListDto } from '@proxy/catalog/countries';
+import { TourCategoriesService, TourCategoryInListDto } from '@proxy/catalog/tour-categories';
+import { TourDto, ToursService } from '@proxy/catalog/tours';
+import { tourTypeOptions } from '@proxy/trung-hieu-tourists/tours';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { UtilityService } from 'src/app/shared/services/utility.service';
 
 @Component({
   selector: 'app-tour-detail',

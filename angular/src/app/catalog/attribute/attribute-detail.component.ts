@@ -1,12 +1,14 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { TourAttributeDto, TourAttributesService } from '@proxy/tour-attributes';
+
 import { attributeTypeOptions } from '@proxy/trung-hieu-tourists/tour-attributes';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
-import { NotificationService } from '../shared/services/notification.service';
-import { UtilityService } from '../shared/services/utility.service';
+import { NotificationService } from '../../shared/services/notification.service';
+import { UtilityService } from '../../shared/services/utility.service';
+import { TourAttributeDto } from '@proxy/catalog/tour-attributes';
+import { TourAttributesService } from '@proxy/catalog/product-attributes';
 
 @Component({
   selector: 'app-attribute-detail',

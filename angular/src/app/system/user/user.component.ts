@@ -1,21 +1,20 @@
 import { PagedResultDto } from '@abp/ng.core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RoleDto, RoleInListDto } from '@proxy/roles';
-import { ConfirmationService } from 'primeng/api';
+import { UserDto, UserInListDto, UsersService } from '@proxy/system/users';
+
+import { ConfirmationService, MenuItem } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
+import { MessageConstants } from 'src/app/shared/constants/messages.const';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { MessageConstants } from '../shared/constants/messages.const';
-import { RoleDetailComponent } from './role-detail.component';
-import { RolesService } from '@proxy/system/roles/roles.service';
-import { PermissionGrantComponent } from './permission-grant.component';
+import { UserDetailComponent } from './user-detail.component';
 
 @Component({
-  selector: 'app-role',
-  templateUrl: './role.component.html',
-  styleUrls: ['./role.component.scss'],
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss'],
 })
-export class RoleComponent implements OnInit, OnDestroy {
+export class UserComponent implements OnInit, OnDestroy {
   //System variables
   private ngUnsubscribe = new Subject<void>();
   public blockedPanel: boolean = false;
@@ -26,12 +25,12 @@ export class RoleComponent implements OnInit, OnDestroy {
   public totalCount: number;
 
   //Business variables
-  public items: RoleDto[];
-  public selectedItems: RoleDto[] = [];
+  public items: UserInListDto[];
+  public selectedItems: UserInListDto[] = [];
   public keyword: string = '';
 
   constructor(
-    private roleService: RolesService,
+    private userService: UsersService,
     public dialogService: DialogService,
     private notificationService: NotificationService,
     private confirmationService: ConfirmationService
@@ -48,16 +47,15 @@ export class RoleComponent implements OnInit, OnDestroy {
 
   loadData(selectionId = null) {
     this.toggleBlockUI(true);
-
-    this.roleService
-      .getListFilter({
+    this.userService
+      .getListWithFilter({
         maxResultCount: this.maxResultCount,
         skipCount: this.skipCount,
         keyword: this.keyword,
       })
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (response: PagedResultDto<RoleInListDto>) => {
+        next: (response: PagedResultDto<UserInListDto>) => {
           this.items = response.items;
           this.totalCount = response.totalCount;
           if (selectionId != null && this.items.length > 0) {
@@ -73,12 +71,12 @@ export class RoleComponent implements OnInit, OnDestroy {
   }
 
   showAddModal() {
-    const ref = this.dialogService.open(RoleDetailComponent, {
-      header: 'Thêm mới quyền',
+    const ref = this.dialogService.open(UserDetailComponent, {
+      header: 'Thêm mới người dùng',
       width: '70%',
     });
 
-    ref.onClose.subscribe((data: RoleDto) => {
+    ref.onClose.subscribe((data: UserDto) => {
       if (data) {
         this.notificationService.showSuccess(MessageConstants.CREATED_OK_MSG);
         this.selectedItems = [];
@@ -99,15 +97,15 @@ export class RoleComponent implements OnInit, OnDestroy {
       return;
     }
     var id = this.selectedItems[0].id;
-    const ref = this.dialogService.open(RoleDetailComponent, {
+    const ref = this.dialogService.open(UserDetailComponent, {
       data: {
         id: id,
       },
-      header: 'Cập nhật quyền',
+      header: 'Cập nhật người dùng',
       width: '70%',
     });
 
-    ref.onClose.subscribe((data: RoleDto) => {
+    ref.onClose.subscribe((data: UserDto) => {
       if (data) {
         this.notificationService.showSuccess(MessageConstants.UPDATED_OK_MSG);
         this.selectedItems = [];
@@ -115,24 +113,7 @@ export class RoleComponent implements OnInit, OnDestroy {
       }
     });
   }
-  showPermissionModal(id: string, name: string) {
-    const ref = this.dialogService.open(PermissionGrantComponent, {
-      data: {
-        id: id,
-        name: name,
-      },
-      header: name,
-      width: '70%',
-    });
 
-    ref.onClose.subscribe((data: RoleDto) => {
-      if (data) {
-        this.notificationService.showSuccess(MessageConstants.UPDATED_OK_MSG);
-        this.selectedItems = [];
-        this.loadData(data.id);
-      }
-    });
-  }
   deleteItems() {
     if (this.selectedItems.length == 0) {
       this.notificationService.showError(MessageConstants.NOT_CHOOSE_ANY_RECORD);
@@ -152,8 +133,7 @@ export class RoleComponent implements OnInit, OnDestroy {
 
   deleteItemsConfirm(ids: any[]) {
     this.toggleBlockUI(true);
-
-    this.roleService.deleteMultiple(ids).subscribe({
+    this.userService.deleteMultiple(ids).subscribe({
       next: () => {
         this.notificationService.showSuccess(MessageConstants.DELETED_OK_MSG);
         this.loadData();
@@ -165,6 +145,42 @@ export class RoleComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+  // setPassword(id: string) {
+  //   const ref = this.dialogService.open(SetPasswordComponent, {
+  //     data: {
+  //       id: id,
+  //     },
+  //     header: 'Đặt lại mật khẩu',
+  //     width: '70%',
+  //   });
+
+  //   ref.onClose.subscribe((result: boolean) => {
+  //     if (result) {
+  //       this.notificationService.showSuccess(MessageConstants.CHANGE_PASSWORD_SUCCCESS_MSG);
+  //       this.selectedItems = [];
+  //       this.loadData();
+  //     }
+  //   });
+  // }
+
+  // assignRole(id: string) {
+  //   const ref = this.dialogService.open(RoleAssignComponent, {
+  //     data: {
+  //       id: id,
+  //     },
+  //     header: 'Gán quyền',
+  //     width: '70%',
+  //   });
+
+  //   ref.onClose.subscribe((result: boolean) => {
+  //     if (result) {
+  //       this.notificationService.showSuccess(MessageConstants.ROLE_ASSIGN_SUCCESS_MSG);
+  //       this.loadData();
+  //     }
+  //   });
+  // }
+
   private toggleBlockUI(enabled: boolean) {
     if (enabled == true) {
       this.blockedPanel = true;

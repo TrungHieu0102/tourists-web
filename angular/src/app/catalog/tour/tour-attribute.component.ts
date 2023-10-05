@@ -1,14 +1,17 @@
 import { ConfirmationService } from 'primeng/api';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { TourAttributeInListDto, TourAttributesService } from '@proxy/tour-attributes';
-import { TourDto, ToursService } from '@proxy/tours';
-import { TourAttributeValueDto } from '@proxy/tours/attributes';
+
+
 import { AttributeType } from '@proxy/trung-hieu-tourists/tour-attributes';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
-import { NotificationService } from '../shared/services/notification.service';
-import { UtilityService } from '../shared/services/utility.service';
+import { TourAttributesService } from '@proxy/catalog/product-attributes';
+import { ToursService } from '@proxy/catalog/tours';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { TourAttributeInListDto } from '@proxy/catalog/tour-attributes';
+import { TourAttributeValueDto } from '@proxy/catalog/tours/attributes';
+
 @Component({
   selector: 'app-tour-attribute',
   templateUrl: './tour-attribute.component.html',

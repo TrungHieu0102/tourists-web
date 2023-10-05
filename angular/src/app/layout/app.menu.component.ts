@@ -20,15 +20,15 @@ export class AppMenuComponent implements OnInit {
       {
         label: 'Tour',
         items: [
-          { label: 'Danh sách tour', icon: 'pi pi-fw pi-circle', routerLink: ['/tour'] },
-          { label: 'Danh sách thuộc tính', icon: 'pi pi-fw pi-circle', routerLink: ['/attribute'] },
+          { label: 'Danh sách tour', icon: 'pi pi-fw pi-circle', routerLink: ['/catalog/tour'] },
+          { label: 'Danh sách thuộc tính', icon: 'pi pi-fw pi-circle', routerLink: ['/catalog/attribute'] },
         ],
       },
       {
         label: 'Hệ thống',
         items: [
-          { label: 'Danh sách quyền', icon: 'pi pi-fw pi-circle', routerLink: ['/role'] },
-          { label: 'Danh sách người dùng', icon: 'pi pi-fw pi-circle', routerLink: ['/user'] },
+          { label: 'Danh sách quyền', icon: 'pi pi-fw pi-circle', routerLink: ['/system/role'] },
+          { label: 'Danh sách người dùng', icon: 'pi pi-fw pi-circle', routerLink: ['/system/user'] },
 
         ],
       }

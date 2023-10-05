@@ -1,23 +1,27 @@
 import { PagedResultDto } from '@abp/ng.core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { TourAttributeDto, TourAttributeInListDto, TourAttributesService } from '@proxy/tour-attributes';
-import { AttributeType } from '@proxy/trung-hieu-tourists/tour-attributes';
-import { ConfirmationService } from 'primeng/api';
+
 import { DialogService } from 'primeng/dynamicdialog';
-import { Subject, take, takeUntil } from 'rxjs';
-import { NotificationService } from '../shared/services/notification.service';
-import { AttributeDetailComponent } from './attribute-detail.component';
+import { Subject, takeUntil } from 'rxjs';
+
+import { TourDetailComponent } from './tour-detail.component';
+import { TourType } from '@proxy/trung-hieu-tourists/tours';
+import { ConfirmationService } from 'primeng/api';
+import { TourAttributeComponent } from './tour-attribute.component';
+import { TourCategoriesService, TourCategoryInListDto } from '@proxy/catalog/tour-categories';
+import { TourInListDto, ToursService, TourDto } from '@proxy/catalog/tours';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
-  selector: 'app-attribute',
-  templateUrl: './attribute.component.html',
-  styleUrls: ['./attribute.component.scss'],
+  selector: 'app-tour',
+  templateUrl: './tour.component.html',
+  styleUrls: ['./tour.component.scss'],
 })
-export class AttributeComponent implements OnInit, OnDestroy {
+export class TourComponent implements OnInit, OnDestroy {
   private ngUnsubscribe = new Subject<void>();
   blockedPanel: boolean = false;
-  items: TourAttributeInListDto[] = [];
-  public selectedItems: TourAttributeInListDto[] = [];
+  items: TourInListDto[] = [];
+  public selectedItems:TourInListDto[] = [];
 
   //Paging variables
   public skipCount: number = 0;
@@ -25,12 +29,13 @@ export class AttributeComponent implements OnInit, OnDestroy {
   public totalCount: number;
 
   //Filter
-  AttributeCategories: any[] = [];
+  tourCategories: any[] = [];
   keyword: string = '';
   categoryId: string = '';
 
   constructor(
-    private attributeService: TourAttributesService,
+    private tourService: ToursService,
+    private tourCategoryService: TourCategoriesService,
     private dialogService: DialogService,
     private notificationService: NotificationService,
     private confirmationService: ConfirmationService
@@ -42,20 +47,22 @@ export class AttributeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loadTourCategories();
     this.loadData();
   }
 
   loadData() {
     this.toggleBlockUI(true);
-    this.attributeService
+    this.tourService
       .getListFilter({
         keyword: this.keyword,
+        categoryId: this.categoryId,
         maxResultCount: this.maxResultCount,
         skipCount: this.skipCount,
       })
       .pipe(takeUntil(this.ngUnsubscribe))
       .subscribe({
-        next: (response: PagedResultDto<TourAttributeInListDto>) => {
+        next: (response: PagedResultDto<TourInListDto>) => {
           this.items = response.items;
           this.totalCount = response.totalCount;
           this.toggleBlockUI(false);
@@ -66,21 +73,32 @@ export class AttributeComponent implements OnInit, OnDestroy {
       });
   }
 
+  loadTourCategories() {
+    this.tourCategoryService.getListAll().subscribe((response: TourCategoryInListDto[]) => {
+      response.forEach(element => {
+        this.tourCategories.push({
+          value: element.id,
+          label: element.name,
+        });
+      });
+    });
+  }
+
   pageChanged(event: any): void {
     this.skipCount = (event.page - 1) * this.maxResultCount;
     this.maxResultCount = event.rows;
     this.loadData();
   }
   showAddModal() {
-    const ref = this.dialogService.open(AttributeDetailComponent, {
-      header: 'Thêm mới sản phẩm',
+    const ref = this.dialogService.open(TourDetailComponent, {
+      header: 'Thêm mới Tour',
       width: '70%',
     });
 
-    ref.onClose.subscribe((data: TourAttributeDto) => {
+    ref.onClose.subscribe((data: TourDto) => {
       if (data) {
         this.loadData();
-        this.notificationService.showSuccess('Thêm thuộc tính thành công');
+        this.notificationService.showSuccess('Thêm tour thành công');
         this.selectedItems = [];
       }
     });
@@ -92,19 +110,18 @@ export class AttributeComponent implements OnInit, OnDestroy {
       return;
     }
     const id = this.selectedItems[0].id;
-    const ref = this.dialogService.open(AttributeDetailComponent, {
+    const ref = this.dialogService.open(TourDetailComponent, {
       data: {
         id: id,
       },
-      header: 'Cập nhật sản phẩm',
+      header: 'Cập nhật tour',
       width: '70%',
     });
-
-    ref.onClose.subscribe((data: TourAttributeDto) => {
+    ref.onClose.subscribe((data: TourDto) => {
       if (data) {
         this.loadData();
         this.selectedItems = [];
-        this.notificationService.showSuccess('Cập nhật thuộc tính thành công');
+        this.notificationService.showSuccess('Cập nhật tour thành công');
       }
     });
   }
@@ -124,10 +141,26 @@ export class AttributeComponent implements OnInit, OnDestroy {
       }
     })
   }
+  manageTourAttribute(id: string) {
+    const ref = this.dialogService.open(TourAttributeComponent, {
+      data: {
+        id: id,
+      },
+      header: 'Quản lý thuộc tính tour',
+      width: '70%',
+    });
 
+    ref.onClose.subscribe((data: TourDto) => {
+      if (data) {
+        this.loadData();
+        this.selectedItems = [];
+        this.notificationService.showSuccess('Cập nhật thuộc tính tour thành công');
+      }
+    });
+  }
   deleteItemsConfirmed(ids: string[]){
     this.toggleBlockUI(true);
-    this.attributeService.deleteMultiple(ids).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
+    this.tourService.deleteMultiple(ids).pipe(takeUntil(this.ngUnsubscribe)).subscribe({
       next: ()=>{
         this.notificationService.showSuccess("Xóa thành công");
         this.loadData();
@@ -139,9 +172,8 @@ export class AttributeComponent implements OnInit, OnDestroy {
       }
     })
   }
-
-  getAttributeTypeName(value: number){
-    return AttributeType[value];
+  getTourTypeName(value: number){
+    return TourType[value];
   }
 
   private toggleBlockUI(enabled: boolean) {
