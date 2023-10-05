@@ -10,6 +10,34 @@ namespace TrungHieuTourists.Tours
 {
     public class Tour : AuditedAggregateRoot<Guid>
     {
+        public Tour() { }
+        public Tour(Guid id, Guid countryId,
+            string name, string code, string slug,
+            TourType tourType, string sKU,
+            int sortOrder, bool visibility,
+            bool isActive, Guid categoryId,
+            string seoMetaDescription, string description,
+            string thumbnailPicture, double sellPrice,
+            string categoryName, string categorySlug)
+        {
+            Id = id;
+            CountryId =countryId;
+            Name = name;
+            Code = code;
+            Slug = slug;
+            TourType = tourType;
+            SKU = sKU;
+            SortOrder = sortOrder;
+            Visibility = visibility;
+            IsActive = isActive;
+            CategoryId = categoryId;
+            SeoMetaDescription = seoMetaDescription;
+            Description = description;
+            ThumbnailPicture = thumbnailPicture;
+            SellPrice = sellPrice;
+            CategoryName = categoryName;
+            CategorySlug = categorySlug;
+        }
         public Guid CountryId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
@@ -23,6 +51,10 @@ namespace TrungHieuTourists.Tours
         public string SeoMetaDescription { get; set; }
         public string Description { get; set; }
         public string ThumbnailPicture { get; set; }
+        public double SellPrice { get; set; }
+
+        public string CategoryName { get; set; }
+        public string CategorySlug { get; set; }
 
     }
 }

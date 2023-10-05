@@ -10,16 +10,15 @@
 
     <p class="lead px-lg-5 mx-lg-5">{{ '::LongWelcomeMessage' | abpLocalization }}</p>
 
-    <a *ngIf="!hasLoggedIn" (click)="login()" class="px-4 btn btn-primary ms-1" role="button"
-    ><i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'AbpAccount::Login' | abpLocalization }}</a
-    >
+    <a *ngIf="!hasLoggedIn" (click)="login()" class="px-4 btn btn-primary ms-1" role="button"><i class="fa fa-sign-in"
+        aria-hidden="true"></i> {{ 'AbpAccount::Login' | abpLocalization }}</a>
   </div>
   <div class="card">
     <div class="card-body">
       <div class="row">
         <div class="col-md-auto text-center">
           <img src="https://abp.io/assets/png/mastering-abp-framework.webp" style="max-width: 400px;"
-               class="w-100 mb-5 my-md-3">
+            class="w-100 mb-5 my-md-3">
         </div>
         <div class="col-md d-flex align-items-center">
           <div class="pe-0 pe-md-4">
@@ -29,12 +28,12 @@
               understanding of the framework and modern web application development techniques.</p>
             <div class="mb-4">
               <a href="https://www.amazon.com/gp/product/B097Z2DM8Q/ref=dbs_a_def_rwt_hsch_vapi_tkin_p1_i0"
-                 class="btn btn-success mb-1">
+                class="btn btn-success mb-1">
                 Buy on Amazon US
               </a>
               &nbsp;
               <a href="https://www.packtpub.com/product/mastering-abp-framework/9781801079242"
-                 class="btn btn-primary mb-1">
+                class="btn btn-primary mb-1">
                 Buy on PACKT
               </a>
             </div>
@@ -50,8 +49,7 @@
   <div class="card mt-4 mb-5">
     <div class="card-body">
       <div class="row text-center justify-content-md-center">
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             starterLinkTemplate;
             context: {
               $implicit: {
@@ -66,11 +64,9 @@
                 ]
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             starterLinkTemplate;
             context: {
               $implicit: {
@@ -84,11 +80,9 @@
                 ]
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             starterLinkTemplate;
             context: {
               $implicit: {
@@ -106,12 +100,10 @@
                 ]
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
       </div>
       <div class="row text-center mt-lg-3 justify-content-md-center">
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             starterLinkTemplate;
             context: {
               $implicit: {
@@ -125,13 +117,11 @@
                 ]
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
         <ng-template #githubButtonsTemplate>
           <p class="mb-1">
-            <iframe
-              scrolling="no"
+            <iframe scrolling="no"
               src="https://buttons.github.io/buttons.html#href=https%3A%2F%2Fgithub.com%2Fabpframework%2Fabp&amp;title=&amp;aria-label=Star%20tabalinas%2Fjsgrid%20on%20GitHub&amp;data-icon=octicon-star&amp;data-text=Star&amp;data-size=large&amp;data-show-count=true"
               style="
                 width: 122px;
@@ -139,10 +129,8 @@
                 border: none;
                 display: inline-block;
                 margin-right: 4px;
-              "
-            ></iframe>
-            <iframe
-              scrolling="no"
+              "></iframe>
+            <iframe scrolling="no"
               src="https://buttons.github.io/buttons.html#href=https%3A%2F%2Fgithub.com%2Fabpframework%2Fabp%2Fissues&amp;title=&amp;aria-label=Issue%20tabalinas%2Fjsgrid%20on%20GitHub&amp;data-icon=octicon-issue-opened&amp;data-text=Issue&amp;data-size=large"
               style="
                 width: 72px;
@@ -150,19 +138,15 @@
                 border: none;
                 display: inline-block;
                 margin-right: 4px;
-              "
-            ></iframe>
+              "></iframe>
 
-            <iframe
-              scrolling="no"
+            <iframe scrolling="no"
               src="https://buttons.github.io/buttons.html#href=https%3A%2F%2Fgithub.com%2Fabpframework%2Fabp%2Ffork&amp;title=&amp;aria-label=Fork%20tabalinas%2Fjsgrid%20on%20GitHub&amp;data-icon=octicon-repo-forked&amp;data-text=Fork&amp;data-size=large&amp;"
-              style="width: 72px; height: 28px; border: none; display: inline-block"
-            ></iframe>
+              style="width: 72px; height: 28px; border: none; display: inline-block"></iframe>
           </p>
         </ng-template>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             starterLinkTemplate;
             context: {
               $implicit: {
@@ -178,11 +162,9 @@
                 customTemplate: githubButtonsTemplate
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             starterLinkTemplate;
             context: {
               $implicit: {
@@ -200,8 +182,7 @@
                 ]
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
       </div>
     </div>
   </div>
@@ -220,8 +201,7 @@
       </p>
 
       <div class="row text-center justify-content-md-center">
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             featuresTemplate;
             context: {
               $implicit: {
@@ -229,11 +209,9 @@
                 href: 'https://commercial.abp.io/startup-templates?ref=tmpl'
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             featuresTemplate;
             context: {
               $implicit: {
@@ -241,11 +219,9 @@
                 href: 'https://commercial.abp.io/modules?ref=tmpl'
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             featuresTemplate;
             context: {
               $implicit: {
@@ -253,11 +229,9 @@
                 href: 'https://commercial.abp.io/tools?ref=tmpl'
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             featuresTemplate;
             context: {
               $implicit: {
@@ -265,11 +239,9 @@
                 href: 'https://commercial.abp.io/themes?ref=tmpl'
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             featuresTemplate;
             context: {
               $implicit: {
@@ -277,11 +249,9 @@
                 href: 'https://support.abp.io/QA/Questions?ref=tmpl'
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
 
-        <ng-container
-          *ngTemplateOutlet="
+        <ng-container *ngTemplateOutlet="
             featuresTemplate;
             context: {
               $implicit: {
@@ -289,22 +259,18 @@
                 href: 'https://commercial.abp.io/additional-services?ref=tmpl'
               }
             }
-          "
-        ></ng-container>
+          "></ng-container>
       </div>
     </div>
   </div>
   <div class="mb-5 text-center">
     <p class="align-middle">
-      <a href="https://twitter.com/abpframework" target="_blank" class="mx-2"
-      ><i class="fa fa-twitter" aria-hidden="true"></i><span class="text-secondary"> Abp Framework</span></a
-      >
-      <a href="https://twitter.com/abpcommercial" target="_blank" class="mx-2"
-      ><i class="fa fa-twitter" aria-hidden="true"></i><span class="text-secondary"> Abp Commercial</span></a
-      >
-      <a href="https://github.com/abpframework/abp" target="_blank" class="mx-2"
-      ><i class="fa fa-github" aria-hidden="true"></i><span class="text-secondary"> abpframework</span></a
-      >
+      <a href="https://twitter.com/abpframework" target="_blank" class="mx-2"><i class="fa fa-twitter"
+          aria-hidden="true"></i><span class="text-secondary"> Abp Framework</span></a>
+      <a href="https://twitter.com/abpcommercial" target="_blank" class="mx-2"><i class="fa fa-twitter"
+          aria-hidden="true"></i><span class="text-secondary"> Abp Commercial</span></a>
+      <a href="https://github.com/abpframework/abp" target="_blank" class="mx-2"><i class="fa fa-github"
+          aria-hidden="true"></i><span class="text-secondary"> abpframework</span></a>
     </p>
   </div>
 </div>
@@ -316,17 +282,9 @@
         <i class="fas fa-cubes text-secondary d-block my-3 fa-2x" aria-hidden="true"></i> {{ context.title }}
       </h5>
       <p [innerHTML]="context.description"></p>
-      <ng-container
-        *ngIf="context.customTemplate"
-        [ngTemplateOutlet]="context.customTemplate"
-      ></ng-container>
-      <a
-        *ngFor="let link of context.links"
-        [href]="link.href"
-        target="_blank"
-        class="btn btn-link px-1"
-      >{{ link.label }} <i class="fas fa-chevron-right" aria-hidden="true"></i
-      ></a>
+      <ng-container *ngIf="context.customTemplate" [ngTemplateOutlet]="context.customTemplate"></ng-container>
+      <a *ngFor="let link of context.links" [href]="link.href" target="_blank" class="btn btn-link px-1">{{ link.label
+        }} <i class="fas fa-chevron-right" aria-hidden="true"></i></a>
     </div>
   </div>
 </ng-template>
@@ -337,9 +295,8 @@
       <h6>
         <i class="fas fa-plus d-block mb-3 fa- 2x text-secondary" aria-hidden="true"></i>
         <span [innerHTML]="context.title"></span>
-        <a [href]="context.href" target="_blank" class="d-block mt-2 btn btn-sm btn-link"
-        >Details <i class="fas fa-chevron-right" aria-hidden="true"></i
-        ></a>
+        <a [href]="context.href" target="_blank" class="d-block mt-2 btn btn-sm btn-link">Details <i
+            class="fas fa-chevron-right" aria-hidden="true"></i></a>
       </h6>
     </div>
   </div>

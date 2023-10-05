@@ -5,10 +5,10 @@ import { LOGIN_URL } from './shared/constants/urls.const';
 import { AuthService } from './shared/services/auth.service';
 @Component({
   selector: 'app-root',
-  template: `
-   
-    <router-outlet></router-outlet>
-  `,
+  template: ` <router-outlet></router-outlet> 
+  <p-toast position="top-right"></p-toast>
+  <p-confirmDialog header="Xác nhận" acceptLabel="Có" rejectLabel="Không" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+`,
 })
 export class AppComponent {
   menuMode = 'static';

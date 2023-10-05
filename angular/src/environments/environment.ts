@@ -15,7 +15,7 @@ export const environment = {
     clientId: 'TrungHieuTourists_Admin',
     dummyClientSecret:'1q2w3e*',
     responseType: 'code',
-    scope: 'offline_access TrungHieuTourists.Admin',
+    scope: 'TrungHieuTourists.Admin offline_access',
     requireHttps: true,
   },
   apis: {
