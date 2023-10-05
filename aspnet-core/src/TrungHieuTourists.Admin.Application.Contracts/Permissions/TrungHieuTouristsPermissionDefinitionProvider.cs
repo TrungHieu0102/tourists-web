@@ -9,7 +9,7 @@ public class TrungHieuTouristsPermissionsDefinitionProvider : PermissionDefiniti
     public override void Define(IPermissionDefinitionContext context)
     {
         //Catalog
-        var catalogGroup = context.AddGroup(TrungHieuTouristsPermissions.CatalogGroupName);
+        var catalogGroup = context.AddGroup(TrungHieuTouristsPermissions.CatalogGroupName, L("Permission:Catalog"));
 
         //Add product
         var productPermission = catalogGroup.AddPermission(TrungHieuTouristsPermissions.Tour.Default, L("Permission:Catalog.Tour"));

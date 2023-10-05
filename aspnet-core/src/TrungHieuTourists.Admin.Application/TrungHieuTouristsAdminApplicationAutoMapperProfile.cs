@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
-using TrungHieuTourists.Admin.Countries;
+using TrungHieuTourists.Admin.Catalog.Countries;
+using TrungHieuTourists.Admin.Catalog.TourAttributes;
+using TrungHieuTourists.Admin.Catalog.TourCategories;
+using TrungHieuTourists.Admin.Catalog.Tours;
 using TrungHieuTourists.Admin.Roles;
-using TrungHieuTourists.Admin.TourAttributes;
-using TrungHieuTourists.Admin.TourCategories;
-using TrungHieuTourists.Admin.Tours;
+using TrungHieuTourists.Admin.System.Roles;
+using TrungHieuTourists.Admin.System.Users;
 using TrungHieuTourists.Countries;
 using TrungHieuTourists.Roles;
 using TrungHieuTourists.TourAttributes;
@@ -51,6 +53,9 @@ public class TrungHieuTouristsAdminApplicationAutoMapperProfile : Profile
             :
             null));
         CreateMap<CreateUpdateRoleDto, IdentityRole>();
+        //User
+        CreateMap<IdentityUser, UserDto>();
+        CreateMap<IdentityUser, UserInListDto>();
 
 
     }

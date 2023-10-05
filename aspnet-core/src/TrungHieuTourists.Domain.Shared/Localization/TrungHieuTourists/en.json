@@ -1,6 +1,7 @@
 {
   "culture": "en",
   "texts": {
+    "Permission:Catalog": "Danh mục",
     "Permission:Catalog.Product": "Tour",
     "Permission:Catalog.Product.Create": "Tạo mới tour",
     "Permission:Catalog.Product.Update": "Cập nhật tour",
