@@ -24,6 +24,10 @@ import { UserComponent } from './user/user.component';
 import { UserDetailComponent } from './user/user-detail.component';
 import { SystemRoutingModule } from './system-routing.module';
 import { TourSharedModule } from '../shared/modules/tour-shared.module';
+import {PickListModule} from 'primeng/picklist';
+import { RoleAssignComponent } from './user/role-assign.component';
+import { SetPasswordComponent } from './user/set-password.component';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -32,6 +36,8 @@ import { TourSharedModule } from '../shared/modules/tour-shared.module';
     PermissionGrantComponent,
     UserComponent,
     UserDetailComponent,
+    RoleAssignComponent,
+    SetPasswordComponent
   ],
   imports: [
     SharedModule,
@@ -54,6 +60,8 @@ import { TourSharedModule } from '../shared/modules/tour-shared.module';
     ConfirmDialogModule,
     CalendarModule,
     SystemRoutingModule,
+    PickListModule,
+    KeyFilterModule
   ],
   
 })

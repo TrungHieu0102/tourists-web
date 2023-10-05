@@ -8,6 +8,8 @@ import { Subject, takeUntil } from 'rxjs';
 import { MessageConstants } from 'src/app/shared/constants/messages.const';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UserDetailComponent } from './user-detail.component';
+import { RoleAssignComponent } from './role-assign.component';
+import { SetPasswordComponent } from './set-password.component';
 
 @Component({
   selector: 'app-user',
@@ -146,41 +148,40 @@ export class UserComponent implements OnInit, OnDestroy {
     });
   }
 
-  // setPassword(id: string) {
-  //   const ref = this.dialogService.open(SetPasswordComponent, {
-  //     data: {
-  //       id: id,
-  //     },
-  //     header: 'Đặt lại mật khẩu',
-  //     width: '70%',
-  //   });
+  setPassword(id: string) {
+    const ref = this.dialogService.open(SetPasswordComponent, {
+      data: {
+        id: id,
+      },
+      header: 'Đặt lại mật khẩu',
+      width: '70%',
+    });
 
-  //   ref.onClose.subscribe((result: boolean) => {
-  //     if (result) {
-  //       this.notificationService.showSuccess(MessageConstants.CHANGE_PASSWORD_SUCCCESS_MSG);
-  //       this.selectedItems = [];
-  //       this.loadData();
-  //     }
-  //   });
-  // }
+    ref.onClose.subscribe((result: boolean) => {
+      if (result) {
+        this.notificationService.showSuccess(MessageConstants.CHANGE_PASSWORD_SUCCCESS_MSG);
+        this.selectedItems = [];
+        this.loadData();
+      }
+    });
+  }
 
-  // assignRole(id: string) {
-  //   const ref = this.dialogService.open(RoleAssignComponent, {
-  //     data: {
-  //       id: id,
-  //     },
-  //     header: 'Gán quyền',
-  //     width: '70%',
-  //   });
+  assignRole(id: string) {
+    const ref = this.dialogService.open(RoleAssignComponent, {
+      data: {
+        id: id,
+      },
+      header: 'Gán quyền',
+      width: '70%',
+    });
 
-  //   ref.onClose.subscribe((result: boolean) => {
-  //     if (result) {
-  //       this.notificationService.showSuccess(MessageConstants.ROLE_ASSIGN_SUCCESS_MSG);
-  //       this.loadData();
-  //     }
-  //   });
-  // }
-
+    ref.onClose.subscribe((result: boolean) => {
+      if (result) {
+        this.notificationService.showSuccess(MessageConstants.ROLE_ASSIGN_SUCCESS_MSG);
+        this.loadData();
+      }
+    });
+  }
   private toggleBlockUI(enabled: boolean) {
     if (enabled == true) {
       this.blockedPanel = true;

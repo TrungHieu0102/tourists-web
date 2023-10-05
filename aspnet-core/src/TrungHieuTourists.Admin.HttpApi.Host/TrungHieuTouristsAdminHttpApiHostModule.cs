@@ -31,6 +31,7 @@ using Volo.Abp.VirtualFileSystem;
 using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Identity;
 
 namespace TrungHieuTourists.Admin;
 
@@ -47,6 +48,13 @@ namespace TrungHieuTourists.Admin;
 )]
 public class TrungHieuTouristsAdminHttpApiHostModule : AbpModule
 {
+    public override void PreConfigureServices(ServiceConfigurationContext context)
+    {
+        PreConfigure<IdentityBuilder>(builder =>
+        {
+            builder.AddDefaultTokenProviders();
+        });
+    }
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
         var configuration = context.Services.GetConfiguration();
