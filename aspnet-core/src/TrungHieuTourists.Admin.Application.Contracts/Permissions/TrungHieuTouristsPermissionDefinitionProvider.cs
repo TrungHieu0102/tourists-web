@@ -11,12 +11,7 @@ public class TrungHieuTouristsPermissionsDefinitionProvider : PermissionDefiniti
         //Catalog
         var catalogGroup = context.AddGroup(TrungHieuTouristsPermissions.CatalogGroupName, L("Permission:Catalog"));
 
-        //Add product
-        var productPermission = catalogGroup.AddPermission(TrungHieuTouristsPermissions.Tour.Default, L("Permission:Catalog.Tour"));
-        productPermission.AddChild(TrungHieuTouristsPermissions.Tour.Create, L("Permission:Catalog.Tour.Create"));
-        productPermission.AddChild(TrungHieuTouristsPermissions.Tour.Update, L("Permission:Catalog.Tour.Update"));
-        productPermission.AddChild(TrungHieuTouristsPermissions.Tour.Delete, L("Permission:Catalog.Tour.Delete"));
-        productPermission.AddChild(TrungHieuTouristsPermissions.Tour.AttributeManage, L("Permission:Catalog.Tour.AttributeManage"));
+      
 
         //Add attribute
         var attributePermission = catalogGroup.AddPermission(TrungHieuTouristsPermissions.Attribute.Default, L("Permission:Catalog.Attribute"));
