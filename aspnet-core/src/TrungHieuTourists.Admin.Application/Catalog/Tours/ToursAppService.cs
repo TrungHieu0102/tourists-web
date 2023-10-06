@@ -12,10 +12,11 @@ using Volo.Abp.Domain.Repositories;
 using Volo.Abp.BlobStoring;
 using TrungHieuTourists.TourAttributes;
 using TrungHieuTourists.Admin.Catalog.Tours.Attributes;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrungHieuTourists.Admin.Catalog.Tours
 {
-
+    [Authorize] 
     public class ToursAppService : CrudAppService
         <Tour,
         TourDto,

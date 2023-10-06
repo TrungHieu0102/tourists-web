@@ -11,7 +11,7 @@ using Volo.Abp.ObjectMapping;
 
 namespace TrungHieuTourists.Admin.Catalog.TourCategories
 {
-
+    [Authorize]
     public class TourCategoriesAppService : CrudAppService<
         TourCategory,
         TourCategoryDto,

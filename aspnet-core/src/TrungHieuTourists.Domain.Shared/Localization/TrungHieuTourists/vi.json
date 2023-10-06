@@ -2,14 +2,22 @@
   "culture": "vi",
   "text": {
     "Permission:Catalog": "Danh mục",
-    "Permission:Catalog.Product": "Tour",
-    "Permission:Catalog.Product.Create": "Tạo mới tour",
-    "Permission:Catalog.Product.Update": "Cập nhật tour",
-    "Permission:Catalog.Product.Delete": "Xóa tour",
-    "Permission:Catalog.Product.AttributeManage": "Quản lý thuộc tính",
+    "Permission:Catalog.Tour": "Tour",
+    "Permission:Catalog.Tour.Create": "Tạo mới tour",
+    "Permission:Catalog.Tour.Update": "Cập nhật tour",
+    "Permission:Catalog.Tour.Delete": "Xóa tour",
+    "Permission:Catalog.Tour.AttributeManage": "Quản lý thuộc tính",
     "Permission:Catalog.Attribute": "Thuộc tính",
     "Permission:Catalog.Attribute.Create": "Tạo mới thuộc tính",
     "Permission:Catalog.Attribute.Update": "Cập nhật thuộc tính",
-    "Permission:Catalog.Attribute.Delete": "Xóa thuộc tính"
+    "Permission:Catalog.Attribute.Delete": "Xóa thuộc tính",
+    "Permission:Catalog.Country": "Quốc gia",
+    "Permission:Catalog.Country.Create": "Tạo mới Quốc gia",
+    "Permission:Catalog.Country.Update": "Cập nhật Quốc gia",
+    "Permission:Catalog.Country.Delete": "Xóa Quốc gia",
+    "Permission:Catalog.TourCategory": "Loại sản phẩm",
+    "Permission:Catalog.TourCategory.Create": "Tạo mới Loại sản phẩm",
+    "Permission:Catalog.TourCategory.Update": "Cập nhật Loại sản phẩm",
+    "Permission:Catalog.TourCategory.Delete": "Xóa Loại sản phẩm"
   }
 }

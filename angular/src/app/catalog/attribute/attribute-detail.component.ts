@@ -7,8 +7,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Subject, takeUntil } from 'rxjs';
 import { NotificationService } from '../../shared/services/notification.service';
 import { UtilityService } from '../../shared/services/utility.service';
-import { TourAttributeDto } from '@proxy/catalog/tour-attributes';
-import { TourAttributesService } from '@proxy/catalog/product-attributes';
+import { TourAttributeDto, TourAttributesService } from '@proxy/catalog/tour-attributes';
+
 
 @Component({
   selector: 'app-attribute-detail',

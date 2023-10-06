@@ -6,10 +6,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AttributeType } from '@proxy/trung-hieu-tourists/tour-attributes';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { forkJoin, Subject, takeUntil } from 'rxjs';
-import { TourAttributesService } from '@proxy/catalog/product-attributes';
+
 import { ToursService } from '@proxy/catalog/tours';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { TourAttributeInListDto } from '@proxy/catalog/tour-attributes';
+import { TourAttributeInListDto, TourAttributesService } from '@proxy/catalog/tour-attributes';
 import { TourAttributeValueDto } from '@proxy/catalog/tours/attributes';
 
 @Component({

@@ -13,7 +13,7 @@ using Volo.Abp.Uow;
 
 namespace TrungHieuTourists.Admin.Catalog.Countries
 {
-
+    [Authorize]
     public class CountriesAppService : CrudAppService<
         Country,
         CountryDto,

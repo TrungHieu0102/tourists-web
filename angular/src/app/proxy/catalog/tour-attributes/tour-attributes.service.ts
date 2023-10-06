@@ -1,8 +1,8 @@
+import type { CreateUpdateTourAttributeDto, TourAttributeDto, TourAttributeInListDto } from './models';
 import { RestService, Rest } from '@abp/ng.core';
 import type { PagedResultDto, PagedResultRequestDto } from '@abp/ng.core';
 import { Injectable } from '@angular/core';
 import type { BaseListFilterDto } from '../../models';
-import type { CreateUpdateTourAttributeDto, TourAttributeDto, TourAttributeInListDto } from '../tour-attributes/models';
 
 @Injectable({
   providedIn: 'root',
